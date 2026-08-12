@@ -291,9 +291,9 @@
 
   <h3>📊 Laporan</h3>
 
-  <button type="button">
-    💰 Pemasukan
-  </button>
+  <button type="button" onclick="tampilkanLaporan('pemasukan')">
+  💰 Pemasukan
+</button>
 
   <button type="button">
     💸 Pengeluaran
@@ -832,6 +832,11 @@ function tampilkanWarga() {
 }
 
 tampilkanWarga();
+  function tampilkanLaporan(jenis) {
+  if (jenis === "pemasukan") {
+    alert("Laporan Pemasukan");
+  }
+}
 
 tampilkan();
 document.querySelectorAll(".menu a").forEach(function(menu) {
