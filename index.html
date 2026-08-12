@@ -1,379 +1,598 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kas RT</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-* {
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
+  <title>Kas RT</title>
 
-body {
-  margin: 0;
-  background: #f4f6f8;
-  color: #222;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-.container {
-  max-width: 600px;
-  margin: auto;
-  padding: 20px;
-}
+    body {
+      margin: 0;
+      background: #f4f6f8;
+      color: #222;
+    }
 
-h1 {
-  text-align: center;
-  color: #1677ff;
-  margin-bottom: 20px;
-}
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+      padding: 15px;
+    }
 
-.card {
-  background: white;
-  border-radius: 15px;
-  padding: 20px;
-  margin-bottom: 15px;
-  box-shadow: 0 3px 12px rgba(0,0,0,.08);
-}
+    header {
+      background: #198754;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 0 0 15px 15px;
+    }
 
-.saldo {
-  text-align: center;
-  font-size: 32px;
-  font-weight: bold;
-  color: #16a34a;
-  margin-top: 10px;
-}
+    header h1 {
+      margin: 0;
+    }
 
-.row {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px 0;
-  border-bottom: 1px solid #eee;
-}
+    .card {
+      background: white;
+      margin-top: 15px;
+      padding: 18px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
 
-.row:last-child {
-  border-bottom: none;
-}
+    .card h2,
+    .card h3 {
+      margin-top: 0;
+    }
 
-.masuk {
-  color: #16a34a;
-}
+    input,
+    select,
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      font-size: 16px;
+    }
 
-.keluar {
-  color: #dc2626;
-}
+    input,
+    select {
+      border: 1px solid #ccc;
+    }
 
-input, select {
-  width: 100%;
-  padding: 13px;
-  margin: 7px 0;
-  border: 1px solid #ddd;
-  border-radius: 9px;
-  font-size: 16px;
-}
+    button {
+      border: none;
+      cursor: pointer;
+      color: white;
+    }
 
-button {
-  width: 100%;
-  padding: 13px;
-  border: none;
-  border-radius: 9px;
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 8px;
-  cursor: pointer;
-}
+    .btn-masuk {
+      background: #198754;
+    }
 
-.btn-masuk {
-  background: #16a34a;
-  color: white;
-}
+    .btn-masuk:active {
+      background: #146c43;
+    }
 
-.btn-keluar {
-  background: #dc2626;
-  color: white;
-}
+    .ringkasan {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
 
-.transaksi {
-  padding: 12px 0;
-  border-bottom: 1px solid #eee;
-}
+    .ringkasan .box {
+      padding: 15px;
+      border-radius: 10px;
+      background: #f8f9fa;
+    }
 
-.transaksi-header {
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
-}
+    .box span {
+      display: block;
+      color: #666;
+      margin-bottom: 5px;
+    }
 
-.transaksi small {
-  color: #777;
-}
+    .box strong {
+      font-size: 20px;
+    }
 
-.hapus {
-  width: auto;
-  padding: 6px 10px;
-  margin-top: 5px;
-  background: #eee;
-  color: #dc2626;
-  font-size: 13px;
-}
+    .transaksi {
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
 
-footer {
-  text-align: center;
-  color: #777;
-  font-size: 13px;
-  margin-top: 25px;
-}
-</style>
+    .transaksi-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-weight: bold;
+    }
+
+    .transaksi small {
+      display: block;
+      margin-top: 8px;
+      color: #777;
+    }
+
+    .masuk {
+      color: #198754;
+    }
+
+    .keluar {
+      color: #dc3545;
+    }
+
+    .hapus {
+      background: #dc3545;
+      margin-top: 10px;
+    }
+
+    .edit {
+      background: #0d6efd;
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 10px;
+      color: #777;
+    }
+
+    .kosong {
+      text-align: center;
+      color: #777;
+      padding: 20px 5px;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+  <header>
+    <h1>💰 Kas RT</h1>
+    <p>Sistem Informasi Kas RT</p>
+  </header>
 
-<h1>💰 KAS RT</h1>
+  <div class="container">
 
-<div class="card">
-  <h3>Saldo Kas Saat Ini</h3>
-  <div class="saldo" id="saldo">Rp 0</div>
-</div>
+    <!-- RINGKASAN -->
+    <div class="card">
+      <h3>📊 Ringkasan Kas</h3>
 
-<div class="card">
-  <h3>📊 Ringkasan</h3>
+      <div class="ringkasan">
 
-  <div class="row">
-    <span>Pemasukan</span>
-    <strong class="masuk" id="pemasukan">Rp 0</strong>
+        <div class="box">
+          <span>Pemasukan</span>
+          <strong id="pemasukan">Rp 0</strong>
+        </div>
+
+        <div class="box">
+          <span>Pengeluaran</span>
+          <strong id="pengeluaran">Rp 0</strong>
+        </div>
+
+        <div class="box">
+          <span>Saldo</span>
+          <strong id="saldo">Rp 0</strong>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- TAMBAH TRANSAKSI -->
+    <div class="card">
+
+      <h3>➕ Tambah Transaksi</h3>
+
+      <input
+        id="keterangan"
+        type="text"
+        placeholder="Contoh: Iuran warga"
+      >
+
+      <input
+        id="jumlah"
+        type="number"
+        placeholder="Jumlah uang"
+        min="1"
+      >
+
+      <select id="jenis">
+        <option value="masuk">Pemasukan</option>
+        <option value="keluar">Pengeluaran</option>
+      </select>
+
+      <button
+        type="button"
+        class="btn-masuk"
+        onclick="tambahTransaksi()">
+        💾 Simpan Transaksi
+      </button>
+
+    </div>
+
+
+    <!-- RIWAYAT -->
+    <div class="card">
+
+      <h3>📋 Riwayat Transaksi</h3>
+
+      <div id="daftar"></div>
+
+    </div>
+
   </div>
 
-  <div class="row">
-    <span>Pengeluaran</span>
-    <strong class="keluar" id="pengeluaran">Rp 0</strong>
-  </div>
+  <footer>
+    Sistem Informasi Kas RT
+  </footer>
 
-  <div class="row">
-    <span>Saldo</span>
-    <strong id="saldo2">Rp 0</strong>
-  </div>
-</div>
-
-<div class="card">
-  <h3>➕ Tambah Transaksi</h3>
-
-  <input id="keterangan" type="text"
-    placeholder="Contoh: Iuran warga">
-
-  <input id="jumlah" type="number"
-    placeholder="Jumlah uang">
-
-  <select id="jenis">
-    <option value="masuk">Pemasukan</option>
-    <option value="keluar">Pengeluaran</option>
-  </select>
-
-  <button class="btn-masuk" onclick="tambahTransaksi()">
-    Simpan Transaksi
-  </button>
-</div>
-
-<div class="card">
-  <h3>📋 Riwayat Transaksi</h3>
-
-  <div id="daftar">
-    Belum ada transaksi.
-  </div>
-</div>
-
-<footer>
-  Sistem Informasi Kas RT
-</footer>
-
-</div>
 
 <script>
 
-let transaksi =
-JSON.parse(localStorage.getItem("kasRT")) || [];
+  /* =========================
+     DATA TRANSAKSI
+  ========================= */
 
-function rupiah(angka) {
-  return new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-    maximumFractionDigits: 0
-  }).format(angka);
-}
+  let transaksi = [];
 
-function simpan() {
-  localStorage.setItem(
-    "kasRT",
-    JSON.stringify(transaksi)
-  );
-}
+  /* Ambil data dari localStorage */
+  try {
+    const data = localStorage.getItem("kasRT");
 
-function tambahTransaksi() {
+    if (data) {
+      transaksi = JSON.parse(data);
+    }
 
-  const keterangan =
-    document.getElementById("keterangan").value.trim();
+    if (!Array.isArray(transaksi)) {
+      transaksi = [];
+    }
 
-  const jumlah =
-    Number(document.getElementById("jumlah").value);
-
-  const jenis =
-    document.getElementById("jenis").value;
-
-  if (!keterangan || jumlah <= 0) {
-    alert("Isi keterangan dan jumlah dengan benar.");
-    return;
+  } catch (error) {
+    transaksi = [];
   }
 
-  transaksi.push({
-    id: Date.now(),
-    keterangan: keterangan,
-    jumlah: jumlah,
-    jenis: jenis,
-    tanggal: new Date().toLocaleDateString("id-ID")
-  });
 
-  simpan();
+  /* =========================
+     FORMAT RUPIAH
+  ========================= */
 
-  document.getElementById("keterangan").value = "";
-  document.getElementById("jumlah").value = "";
+  function rupiah(angka) {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      maximumFractionDigits: 0
+    }).format(angka);
+  }
 
-  tampilkan();
-}
-function editTransaksi(id) {
-    const item = transaksi.find(item => item.id === id);
 
-    if (!item) return;
+  /* =========================
+     SIMPAN DATA
+  ========================= */
 
-    const keteranganBaru = prompt(
+  function simpan() {
+    localStorage.setItem(
+      "kasRT",
+      JSON.stringify(transaksi)
+    );
+  }
+
+
+  /* =========================
+     TAMBAH TRANSAKSI
+  ========================= */
+
+  function tambahTransaksi() {
+
+    const inputKeterangan =
+      document.getElementById("keterangan");
+
+    const inputJumlah =
+      document.getElementById("jumlah");
+
+    const inputJenis =
+      document.getElementById("jenis");
+
+
+    const keterangan =
+      inputKeterangan.value.trim();
+
+    const jumlah =
+      Number(inputJumlah.value);
+
+    const jenis =
+      inputJenis.value;
+
+
+    /* Validasi */
+    if (!keterangan) {
+      alert("Keterangan belum diisi.");
+      inputKeterangan.focus();
+      return;
+    }
+
+    if (!jumlah || jumlah <= 0) {
+      alert("Jumlah uang harus lebih dari 0.");
+      inputJumlah.focus();
+      return;
+    }
+
+
+    /* Masukkan transaksi */
+    transaksi.push({
+
+      id: Date.now(),
+
+      keterangan: keterangan,
+
+      jumlah: jumlah,
+
+      jenis: jenis,
+
+      tanggal: new Date().toLocaleString("id-ID")
+
+    });
+
+
+    /* Simpan */
+    simpan();
+
+
+    /* Kosongkan form */
+    inputKeterangan.value = "";
+    inputJumlah.value = "";
+
+
+    /* Tampilkan */
+    tampilkan();
+
+
+    alert("Transaksi berhasil disimpan.");
+
+  }
+
+
+  /* =========================
+     EDIT TRANSAKSI
+  ========================= */
+
+  function editTransaksi(id) {
+
+    const item =
+      transaksi.find(function(data) {
+        return data.id === id;
+      });
+
+
+    if (!item) {
+      return;
+    }
+
+
+    const keteranganBaru =
+      prompt(
         "Ubah keterangan:",
         item.keterangan
-    );
+      );
 
-    if (keteranganBaru === null) return;
 
-    const jumlahBaru = prompt(
+    if (keteranganBaru === null) {
+      return;
+    }
+
+
+    const jumlahBaru =
+      prompt(
         "Ubah jumlah uang:",
         item.jumlah
-    );
+      );
 
-    if (jumlahBaru === null) return;
 
-    const jumlah = Number(jumlahBaru);
-
-    if (!keteranganBaru.trim() || jumlah <= 0) {
-        alert("Keterangan dan jumlah harus benar.");
-        return;
+    if (jumlahBaru === null) {
+      return;
     }
 
-    item.keterangan = keteranganBaru.trim();
-    item.jumlah = jumlah;
+
+    const jumlah =
+      Number(jumlahBaru);
+
+
+    if (!keteranganBaru.trim() || !jumlah || jumlah <= 0) {
+
+      alert(
+        "Keterangan dan jumlah harus benar."
+      );
+
+      return;
+    }
+
+
+    item.keterangan =
+      keteranganBaru.trim();
+
+    item.jumlah =
+      jumlah;
+
 
     simpan();
-    tampilkan();
-}
-  
-function hapusTransaksi(id) {
 
-  if (!confirm("Hapus transaksi ini?")) {
-    return;
+    tampilkan();
+
   }
 
-  transaksi = transaksi.filter(item => item.id !== id);
 
-  simpan();
-  tampilkan();
-}
+  /* =========================
+     HAPUS TRANSAKSI
+  ========================= */
 
-function tampilkan() {
+  function hapusTransaksi(id) {
 
-  let pemasukan = 0;
-  let pengeluaran = 0;
+    const yakin =
+      confirm(
+        "Yakin ingin menghapus transaksi ini?"
+      );
 
-  transaksi.forEach(item => {
 
-    if (item.jenis === "masuk") {
-      pemasukan += item.jumlah;
-    } else {
-      pengeluaran += item.jumlah;
+    if (!yakin) {
+      return;
     }
 
-  });
 
-  const saldo = pemasukan - pengeluaran;
+    transaksi =
+      transaksi.filter(function(item) {
+        return item.id !== id;
+      });
 
-  document.getElementById("pemasukan").innerText =
-    rupiah(pemasukan);
 
-  document.getElementById("pengeluaran").innerText =
-    rupiah(pengeluaran);
+    simpan();
 
-  document.getElementById("saldo").innerText =
-    rupiah(saldo);
+    tampilkan();
 
-  document.getElementById("saldo2").innerText =
-    rupiah(saldo);
-
-  const daftar =
-    document.getElementById("daftar");
-
-  if (transaksi.length === 0) {
-    daftar.innerHTML = "Belum ada transaksi.";
-    return;
   }
 
-  daftar.innerHTML = "";
 
-  [...transaksi].reverse().forEach(item => {
+  /* =========================
+     TAMPILKAN DATA
+  ========================= */
 
-    const div =
-      document.createElement("div");
+  function tampilkan() {
 
-    div.className = "transaksi";
-
-    const warna =
-      item.jenis === "masuk"
-      ? "masuk"
-      : "keluar";
-
-    const tanda =
-      item.jenis === "masuk"
-      ? "+"
-      : "-";
-
-    div.innerHTML = `
-      <div class="transaksi-header">
-        <span>${item.keterangan}</span>
-        <span class="${warna}">
-          ${tanda} ${rupiah(item.jumlah)}
-        </span>
-      </div>
-
-      <small>${item.tanggal}</small>
+    let pemasukan = 0;
+    let pengeluaran = 0;
 
 
-<button
-    class="hapus"
-    onclick="hapusTransaksi(${item.id})">
-    🗑️ Hapus
-</button>
-    `;
-    daftar.appendChild(div);
-}
-function hapusTransaksi(id) {
-  if (!confirm("Yakin ingin menghapus transaksi ini?")) {
-    return;
+    /* Hitung saldo */
+    transaksi.forEach(function(item) {
+
+      if (item.jenis === "masuk") {
+
+        pemasukan += Number(item.jumlah);
+
+      } else {
+
+        pengeluaran += Number(item.jumlah);
+
+      }
+
+    });
+
+
+    const saldo =
+      pemasukan - pengeluaran;
+
+
+    /* Tampilkan ringkasan */
+    document.getElementById("pemasukan").textContent =
+      rupiah(pemasukan);
+
+    document.getElementById("pengeluaran").textContent =
+      rupiah(pengeluaran);
+
+    document.getElementById("saldo").textContent =
+      rupiah(saldo);
+
+
+    /* Daftar transaksi */
+    const daftar =
+      document.getElementById("daftar");
+
+
+    if (transaksi.length === 0) {
+
+      daftar.innerHTML =
+        '<div class="kosong">Belum ada transaksi.</div>';
+
+      return;
+    }
+
+
+    daftar.innerHTML = "";
+
+
+    /* Transaksi terbaru di atas */
+    const dataTerbaru =
+      [...transaksi].reverse();
+
+
+    dataTerbaru.forEach(function(item) {
+
+      const div =
+        document.createElement("div");
+
+
+      div.className =
+        "transaksi";
+
+
+      const warna =
+        item.jenis === "masuk"
+          ? "masuk"
+          : "keluar";
+
+
+      const tanda =
+        item.jenis === "masuk"
+          ? "+"
+          : "-";
+
+
+      div.innerHTML = `
+
+        <div class="transaksi-header">
+
+          <span>
+            ${item.keterangan}
+          </span>
+
+          <span class="${warna}">
+            ${tanda} ${rupiah(item.jumlah)}
+          </span>
+
+        </div>
+
+        <small>
+          ${item.tanggal}
+        </small>
+
+        <button
+          type="button"
+          class="edit"
+          onclick="editTransaksi(${item.id})">
+          ✏️ Edit
+        </button>
+
+        <button
+          type="button"
+          class="hapus"
+          onclick="hapusTransaksi(${item.id})">
+          🗑️ Hapus
+        </button>
+
+      `;
+
+
+      daftar.appendChild(div);
+
+    });
+
   }
 
-  transaksi = transaksi.filter(item => item.id !== id);
 
-  simpan();
+  /* =========================
+     JALANKAN SAAT HALAMAN DIBUKA
+  ========================= */
+
   tampilkan();
-}
-tampilkan();
 
 </script>
 
 </body>
-</html>        
+</html>
