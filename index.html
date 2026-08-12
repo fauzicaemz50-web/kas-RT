@@ -772,13 +772,7 @@ function tampilkanWarga() {
         <span>🏠 ${item.rumah}</span>
       </div>
 
-      <small>
-  📞 ${
-    item.hp
-      ? `<a href="https://wa.me/${item.hp.replace(/^0/, "62")}" target="_blank">${item.hp}</a>`
-      : "Nomor HP belum diisi"
-  }
-</small>
+      <small>📞 ${item.hp ? `<a href="https://wa.me/${item.hp.replace(/^0/, "62")}" target="_blank">${item.hp}</a>` : "Nomor HP belum diisi"}</small>
       <br><br>
 
       <button
