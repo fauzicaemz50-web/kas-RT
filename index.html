@@ -1,1 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kas RT</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f6f8;
+      color: #222;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+      color: #1677ff;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    .saldo {
+      text-align: center;
+      font-size: 30px;
+      font-weight: bold;
+      color: #16a34a;
+      margin-top: 10px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .row:last-child {
+      border-bottom: none;
+    }
+
+    .masuk {
+      color: #16a34a;
+    }
+
+    .keluar {
+      color: #dc2626;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 25px;
+      color: #777;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>💰 KAS RT</h1>
+
+    <div class="card">
+      <h3>Saldo Kas Saat Ini</h3>
+      <div class="saldo">Rp 0</div>
+    </div>
+
+    <div class="card">
+      <h3>📊 Ringkasan</h3>
+
+      <div class="row">
+        <span>Pemasukan</span>
+        <strong class="masuk">Rp 0</strong>
+      </div>
+
+      <div class="row">
+        <span>Pengeluaran</span>
+        <strong class="keluar">Rp 0</strong>
+      </div>
+
+      <div class="row">
+        <span>Saldo</span>
+        <strong>Rp 0</strong>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>📝 Transaksi Terbaru</h3>
+
+      <div class="row">
+        <span>Belum ada transaksi</span>
+        <span>-</span>
+      </div>
+    </div>
+
+    <footer>
+      Sistem Informasi Kas RT
+    </footer>
+
+  </div>
+
+</body>
+</html>
