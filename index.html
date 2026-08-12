@@ -280,8 +280,7 @@ function hapusTransaksi(id) {
     return;
   }
 
-  transaksi =
-    transaksi.filter(item => item.id !== id);
+  transaksi = transaksi.filter(item => item.id !== id);
 
   simpan();
   tampilkan();
