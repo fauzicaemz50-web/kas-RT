@@ -1,123 +1,342 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kas RT</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kas RT</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<style>
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
 
-    body {
-      background: #f4f6f8;
-      color: #222;
-      padding: 20px;
-    }
+body {
+  margin: 0;
+  background: #f4f6f8;
+  color: #222;
+}
 
-    .container {
-      max-width: 600px;
-      margin: auto;
-    }
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
 
-    h1 {
-      text-align: center;
-      margin: 20px 0;
-      color: #1677ff;
-    }
+h1 {
+  text-align: center;
+  color: #1677ff;
+  margin-bottom: 20px;
+}
 
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      margin-bottom: 15px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-    }
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.08);
+}
 
-    .saldo {
-      text-align: center;
-      font-size: 30px;
-      font-weight: bold;
-      color: #16a34a;
-      margin-top: 10px;
-    }
+.saldo {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #16a34a;
+  margin-top: 10px;
+}
 
-    .row {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid #eee;
-    }
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
 
-    .row:last-child {
-      border-bottom: none;
-    }
+.row:last-child {
+  border-bottom: none;
+}
 
-    .masuk {
-      color: #16a34a;
-    }
+.masuk {
+  color: #16a34a;
+}
 
-    .keluar {
-      color: #dc2626;
-    }
+.keluar {
+  color: #dc2626;
+}
 
-    footer {
-      text-align: center;
-      margin-top: 25px;
-      color: #777;
-      font-size: 13px;
-    }
-  </style>
+input, select {
+  width: 100%;
+  padding: 13px;
+  margin: 7px 0;
+  border: 1px solid #ddd;
+  border-radius: 9px;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 9px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.btn-masuk {
+  background: #16a34a;
+  color: white;
+}
+
+.btn-keluar {
+  background: #dc2626;
+  color: white;
+}
+
+.transaksi {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.transaksi-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.transaksi small {
+  color: #777;
+}
+
+.hapus {
+  width: auto;
+  padding: 6px 10px;
+  margin-top: 5px;
+  background: #eee;
+  color: #dc2626;
+  font-size: 13px;
+}
+
+footer {
+  text-align: center;
+  color: #777;
+  font-size: 13px;
+  margin-top: 25px;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <h1>💰 KAS RT</h1>
+<h1>💰 KAS RT</h1>
 
-    <div class="card">
-      <h3>Saldo Kas Saat Ini</h3>
-      <div class="saldo">Rp 0</div>
-    </div>
+<div class="card">
+  <h3>Saldo Kas Saat Ini</h3>
+  <div class="saldo" id="saldo">Rp 0</div>
+</div>
 
-    <div class="card">
-      <h3>📊 Ringkasan</h3>
+<div class="card">
+  <h3>📊 Ringkasan</h3>
 
-      <div class="row">
-        <span>Pemasukan</span>
-        <strong class="masuk">Rp 0</strong>
-      </div>
-
-      <div class="row">
-        <span>Pengeluaran</span>
-        <strong class="keluar">Rp 0</strong>
-      </div>
-
-      <div class="row">
-        <span>Saldo</span>
-        <strong>Rp 0</strong>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>📝 Transaksi Terbaru</h3>
-
-      <div class="row">
-        <span>Belum ada transaksi</span>
-        <span>-</span>
-      </div>
-    </div>
-
-    <footer>
-      Sistem Informasi Kas RT
-    </footer>
-
+  <div class="row">
+    <span>Pemasukan</span>
+    <strong class="masuk" id="pemasukan">Rp 0</strong>
   </div>
 
+  <div class="row">
+    <span>Pengeluaran</span>
+    <strong class="keluar" id="pengeluaran">Rp 0</strong>
+  </div>
+
+  <div class="row">
+    <span>Saldo</span>
+    <strong id="saldo2">Rp 0</strong>
+  </div>
+</div>
+
+<div class="card">
+  <h3>➕ Tambah Transaksi</h3>
+
+  <input id="keterangan" type="text"
+    placeholder="Contoh: Iuran warga">
+
+  <input id="jumlah" type="number"
+    placeholder="Jumlah uang">
+
+  <select id="jenis">
+    <option value="masuk">Pemasukan</option>
+    <option value="keluar">Pengeluaran</option>
+  </select>
+
+  <button class="btn-masuk" onclick="tambahTransaksi()">
+    Simpan Transaksi
+  </button>
+</div>
+
+<div class="card">
+  <h3>📋 Riwayat Transaksi</h3>
+
+  <div id="daftar">
+    Belum ada transaksi.
+  </div>
+</div>
+
+<footer>
+  Sistem Informasi Kas RT
+</footer>
+
+</div>
+
+<script>
+
+let transaksi =
+JSON.parse(localStorage.getItem("kasRT")) || [];
+
+function rupiah(angka) {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0
+  }).format(angka);
+}
+
+function simpan() {
+  localStorage.setItem(
+    "kasRT",
+    JSON.stringify(transaksi)
+  );
+}
+
+function tambahTransaksi() {
+
+  const keterangan =
+    document.getElementById("keterangan").value.trim();
+
+  const jumlah =
+    Number(document.getElementById("jumlah").value);
+
+  const jenis =
+    document.getElementById("jenis").value;
+
+  if (!keterangan || jumlah <= 0) {
+    alert("Isi keterangan dan jumlah dengan benar.");
+    return;
+  }
+
+  transaksi.push({
+    id: Date.now(),
+    keterangan: keterangan,
+    jumlah: jumlah,
+    jenis: jenis,
+    tanggal: new Date().toLocaleDateString("id-ID")
+  });
+
+  simpan();
+
+  document.getElementById("keterangan").value = "";
+  document.getElementById("jumlah").value = "";
+
+  tampilkan();
+}
+
+function hapusTransaksi(id) {
+
+  if (!confirm("Hapus transaksi ini?")) {
+    return;
+  }
+
+  transaksi =
+    transaksi.filter(item => item.id !== id);
+
+  simpan();
+  tampilkan();
+}
+
+function tampilkan() {
+
+  let pemasukan = 0;
+  let pengeluaran = 0;
+
+  transaksi.forEach(item => {
+
+    if (item.jenis === "masuk") {
+      pemasukan += item.jumlah;
+    } else {
+      pengeluaran += item.jumlah;
+    }
+
+  });
+
+  const saldo = pemasukan - pengeluaran;
+
+  document.getElementById("pemasukan").innerText =
+    rupiah(pemasukan);
+
+  document.getElementById("pengeluaran").innerText =
+    rupiah(pengeluaran);
+
+  document.getElementById("saldo").innerText =
+    rupiah(saldo);
+
+  document.getElementById("saldo2").innerText =
+    rupiah(saldo);
+
+  const daftar =
+    document.getElementById("daftar");
+
+  if (transaksi.length === 0) {
+    daftar.innerHTML = "Belum ada transaksi.";
+    return;
+  }
+
+  daftar.innerHTML = "";
+
+  [...transaksi].reverse().forEach(item => {
+
+    const div =
+      document.createElement("div");
+
+    div.className = "transaksi";
+
+    const warna =
+      item.jenis === "masuk"
+      ? "masuk"
+      : "keluar";
+
+    const tanda =
+      item.jenis === "masuk"
+      ? "+"
+      : "-";
+
+    div.innerHTML = `
+      <div class="transaksi-header">
+        <span>${item.keterangan}</span>
+        <span class="${warna}">
+          ${tanda} ${rupiah(item.jumlah)}
+        </span>
+      </div>
+
+      <small>${item.tanggal}</small>
+
+      <br>
+
+      <button
+        class="hapus"
+        onclick="hapusTransaksi(${item.id})">
+        🗑️ Hapus
+      </button>
+    `;
+
+    daftar.appendChild(div);
+  });
+}
+
+tampilkan();
+
+</script>
+
 </body>
-</html>
+</html>        
