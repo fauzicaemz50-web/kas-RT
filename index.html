@@ -197,8 +197,42 @@
   <a href="#pengaturan">⚙️ Pengaturan</a>
 </nav>
 
-  <div class="container">
+<div class="container">
 
+<!-- DATA WARGA -->
+<div class="card" id="warga">
+  <h3>👥 Data Warga</h3>
+
+  <input
+    type="text"
+    id="namaWarga"
+    placeholder="Nama warga"
+  >
+
+  <input
+    type="text"
+    id="rumahWarga"
+    placeholder="Nomor rumah"
+  >
+
+  <input
+    type="text"
+    id="hpWarga"
+    placeholder="Nomor HP"
+  >
+
+  <button
+    type="button"
+    class="tambah"
+    onclick="tambahWarga()"
+  >
+    ➕ Tambah Warga
+  </button>
+
+  <div id="daftarWarga"></div>
+</div>
+
+<!-- RINGKASAN -->
     <!-- RINGKASAN -->
     <div class="card">
       <h3>📊 Ringkasan Kas</h3>
@@ -627,7 +661,126 @@
      JALANKAN SAAT HALAMAN DIBUKA
   ========================= */
 
-  tampilkan();
+/* =========================
+   DATA WARGA
+========================= */
+
+let warga = JSON.parse(
+  localStorage.getItem("dataWarga")
+) || [];
+
+function simpanWarga() {
+  localStorage.setItem(
+    "dataWarga",
+    JSON.stringify(warga)
+  );
+}
+
+function tambahWarga() {
+
+  const nama = document
+    .getElementById("namaWarga")
+    .value
+    .trim();
+
+  const rumah = document
+    .getElementById("rumahWarga")
+    .value
+    .trim();
+
+  const hp = document
+    .getElementById("hpWarga")
+    .value
+    .trim();
+
+  if (!nama || !rumah) {
+    alert("Nama dan nomor rumah wajib diisi.");
+    return;
+  }
+
+  warga.push({
+    id: Date.now(),
+    nama: nama,
+    rumah: rumah,
+    hp: hp
+  });
+
+  simpanWarga();
+
+  document.getElementById("namaWarga").value = "";
+  document.getElementById("rumahWarga").value = "";
+  document.getElementById("hpWarga").value = "";
+
+  tampilkanWarga();
+}
+
+function hapusWarga(id) {
+
+  const yakin = confirm(
+    "Yakin ingin menghapus data warga ini?"
+  );
+
+  if (!yakin) {
+    return;
+  }
+
+  warga = warga.filter(function(item) {
+    return item.id !== id;
+  });
+
+  simpanWarga();
+  tampilkanWarga();
+}
+
+function tampilkanWarga() {
+
+  const daftar = document
+    .getElementById("daftarWarga");
+
+  if (warga.length === 0) {
+
+    daftar.innerHTML =
+      '<div class="kosong">Belum ada data warga.</div>';
+
+    return;
+  }
+
+  daftar.innerHTML = "";
+
+  warga.forEach(function(item) {
+
+    const div = document.createElement("div");
+
+    div.className = "transaksi";
+
+    div.innerHTML = `
+      <div class="transaksi-header">
+        <span>👤 ${item.nama}</span>
+        <span>🏠 ${item.rumah}</span>
+      </div>
+
+      <small>
+        📞 ${item.hp || "Nomor HP belum diisi"}
+      </small>
+
+      <br><br>
+
+      <button
+        type="button"
+        class="hapus"
+        onclick="hapusWarga(${item.id})"
+      >
+        🗑️ Hapus
+      </button>
+    `;
+
+    daftar.appendChild(div);
+  });
+}
+
+tampilkanWarga();
+
+tampilkan();
 
 </script>
 
