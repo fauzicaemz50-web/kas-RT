@@ -781,7 +781,24 @@ function tampilkanWarga() {
 tampilkanWarga();
 
 tampilkan();
+document.querySelectorAll(".menu a").forEach(function(menu) {
+  menu.addEventListener("click", function(e) {
+    const tujuan = this.getAttribute("href");
 
+    if (tujuan && tujuan.startsWith("#")) {
+      e.preventDefault();
+
+      const bagian = document.querySelector(tujuan);
+
+      if (bagian) {
+        bagian.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+    }
+  });
+});
 </script>
 
 </body>
