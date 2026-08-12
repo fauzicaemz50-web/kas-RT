@@ -324,14 +324,51 @@ function tampilkan() {
       <br>
 
       <button
-        class="hapus"
-        onclick="hapusTransaksi(${item.id})">
-        🗑️ Hapus
-      </button>
+    class="edit"
+    onclick="editTransaksi(${item.id})">
+    ✏️ Edit
+</button>
+
+<button
+    class="hapus"
+    onclick="hapusTransaksi(${item.id})">
+    🗑️ Hapus
+</button>
     `;
 
     daftar.appendChild(div);
   });
+ function editTransaksi(id) {
+    const item = transaksi.find(item => item.id === id);
+
+    if (!item) return;
+
+    const keteranganBaru = prompt(
+        "Ubah keterangan:",
+        item.keterangan
+    );
+
+    if (keteranganBaru === null) return;
+
+    const jumlahBaru = prompt(
+        "Ubah jumlah uang:",
+        item.jumlah
+    );
+
+    if (jumlahBaru === null) return;
+
+    const jumlah = Number(jumlahBaru);
+
+    if (!keteranganBaru.trim() || jumlah <= 0) {
+        alert("Keterangan dan jumlah harus benar.");
+        return;
+    }
+
+    item.keterangan = keteranganBaru.trim();
+    item.jumlah = jumlah;
+
+    simpan();
+    tampilkan();
 }
 function hapusTransaksi(id) {
   if (!confirm("Yakin ingin menghapus transaksi ini?")) {
